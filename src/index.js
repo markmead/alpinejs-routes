@@ -1,8 +1,16 @@
 export default function (Alpine) {
-  Alpine.directive(
-    '[name]',
-    (el, { value, modifiers, expression }, { Alpine, effect, cleanup }) => {}
-  )
+  Alpine.magic('route', () => (routeName, routeSlugs) => {
+    let foundRoute = window.alpineRoutes[routeName]
 
-  Alpine.magic('[name]', (el, { Alpine }) => {})
+    const routeSlugParams = Object.keys(routeSlugs)
+
+    routeSlugParams.forEach(function (routeSlugParam) {
+      foundRoute = foundRoute.replace(
+        `:${routeSlugParam}`,
+        routeSlugs[routeSlugParam]
+      )
+    })
+
+    return foundRoute
+  })
 }
