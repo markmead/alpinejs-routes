@@ -34,7 +34,26 @@ Alpine.start()
 
 ## Example
 
-Examples of how the plugin works.
+First you need to your routes map to the `window` object.
+
+```html
+<script>
+  window.alpineRoutes = {
+    blogShow: '/blog/:slug',
+    categoryShow: '/category/:collection/:slug',
+  }
+</script>
+```
+
+And then you can write dynamic routes like this.
+
+```html
+<a :href="$route('blogShow', { slug: 'first-blog' })"> First Blog </a>
+
+<a :href="$route('categoryShow', { collection: 'books', slug: 'first-book' })">
+  First Book
+</a>
+```
 
 ## Stats
 
